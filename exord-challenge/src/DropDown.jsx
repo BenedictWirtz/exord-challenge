@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import "./DropDown.css"
 import { useState, useEffect, useRef } from "react";
+import chevronIcon from "./assets/down-chevron.svg";
 
 
 const DropDown = ({ placeholder, options }) => {
@@ -58,7 +59,14 @@ const DropDown = ({ placeholder, options }) => {
         <div>
             <h1>Components</h1>
             <div className="dropdown" ref={dropdownRef}>
-                <button className={selected !== placeholder ? "selected" : ""} onClick={() => setIsOpen(!isOpen)}>{selected}</button>
+                <button className={selected !== placeholder ? "selected" : ""} onClick={() => setIsOpen(!isOpen)}>
+                    {selected}
+                    <img
+                        src={chevronIcon} // Use imported chevron SVG
+                        alt="Chevron"
+                        className={`chevron ${isOpen ? "rotate" : ""}`} // Apply rotate class for spinning
+                    />
+                </button>
                 {isOpen && (
                     <ul className="dropdown-list">
                         {options.map((option, index) => (
