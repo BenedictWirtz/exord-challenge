@@ -8,14 +8,11 @@ const DropDown = ({ placeholder, options }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [selected, setSelected] = useState(placeholder)
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
-    
-
-    console.log(isOpen)
-    console.log(options)
 
     const dropdownRef = useRef(null)
 
     useEffect(() => {
+        //clicking outside of dropdown menu
         const handleClickOutside = (event) => {
           if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsOpen(false)
@@ -23,6 +20,7 @@ const DropDown = ({ placeholder, options }) => {
           }
         }
 
+        //key navigation
         const handleKeyDown = (event) => {
             if (isOpen) {
                 event.preventDefault()
@@ -47,10 +45,9 @@ const DropDown = ({ placeholder, options }) => {
       }, [isOpen, highlightedIndex, options])
 
     
-
+    //selected option
     const handleSelect = (option) => {
         setSelected(option)
-        console.log("Selected:" + selected)
         setIsOpen(false)
         setHighlightedIndex(-1)
     }
@@ -62,9 +59,9 @@ const DropDown = ({ placeholder, options }) => {
                 <button className={selected !== placeholder ? "selected" : ""} onClick={() => setIsOpen(!isOpen)}>
                     {selected}
                     <img
-                        src={chevronIcon} // Use imported chevron SVG
+                        src={chevronIcon} 
                         alt="Chevron"
-                        className={`chevron ${isOpen ? "rotate" : ""}`} // Apply rotate class for spinning
+                        className={`chevron ${isOpen ? "rotate" : ""}`}
                     />
                 </button>
                 {isOpen && (
